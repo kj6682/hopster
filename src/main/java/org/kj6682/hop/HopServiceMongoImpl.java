@@ -61,25 +61,21 @@ class HopServiceMongoImpl implements HopService {
 
     @Override
     public List<Hop> findAll() {
-        List<Hop> result = new LinkedList<>();
 
-        FindIterable<Document> iterable = hopCollection.find();
-        iterable.forEach(new Block<Document>() {
-            @Override
-            public void apply(final Document document) {
-                try {
-                    Hop hop = new Hop(document.get("_id").toString(),
-                            document.get("title").toString(),
-                            document.get("author").toString(),
-                            Hop.Type.valueOf(document.get("type").toString()),
-                            document.get("location").toString());
-                    result.add(hop);
-                } catch (NullPointerException np) {
-                    System.out.println(String.format("Problems with mandatory attributes for document : %s", document.toString()));
-                }
-            }
-        });
-        return result;
+        return getHops(null);
+    }
+
+    private void makeHop(Document document, List<Hop> result) {
+        try {
+            Hop hop = new Hop(document.get("_id").toString(),
+                    document.get("title").toString(),
+                    document.get("author").toString(),
+                    Hop.Type.valueOf(document.get("type").toString()),
+                    document.get("location").toString());
+            result.add(hop);
+        } catch (NullPointerException np) {
+            System.out.println(String.format("Problems with mandatory attributes for document : %s", document.toString()));
+        }
     }
 
     @Override
@@ -88,16 +84,22 @@ class HopServiceMongoImpl implements HopService {
     }
 
     private List<Hop> getHops(Bson query) {
-        List<Document> foundDocument = hopCollection.find(query).into(new ArrayList<Document>());
-        List<Hop> result = new LinkedList<Hop>();
-        for (Document document : foundDocument) {
-            Hop hop = new Hop(document.get("_id").toString(),
-                    document.get("title").toString(),
-                    document.get("author").toString(),
-                    Hop.Type.valueOf(document.get("type").toString()),
-                    document.get("location").toString());
-            result.add(hop);
+        List<Hop> result = new LinkedList<>();
+        FindIterable<Document> iterable;
+        if(query == null){
+
+            iterable = hopCollection.find();
+
+        }else{
+
+            iterable = hopCollection.find(query);
         }
+        iterable.forEach(new Block<Document>() {
+            @Override
+            public void apply(final Document document) {
+                makeHop(document, result);
+            }
+        });
         return result;
     }
 

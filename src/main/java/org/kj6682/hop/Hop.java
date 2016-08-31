@@ -1,5 +1,7 @@
 package org.kj6682.hop;
 
+import org.springframework.util.Assert;
+
 /**
  * Created by luigi on 26/08/16.
  *
@@ -23,6 +25,20 @@ class Hop {
 
     private final String location;
 
+
+    public Hop(String _id, String title, String author, Type type, String location) {
+        Assert.hasLength(_id, "A not empty _id is necessary when creating a Hop");
+        Assert.hasLength(title, "A reasonable title is necessary when creating a Hop");
+        Assert.notNull(type, "A strict type is necessary when creating a Hop");
+        Assert.hasLength(author, "A Hop needs an author");
+        Assert.hasLength(location, "A Hop is needless without a location");
+
+        this._id = _id;
+        this.title = title;
+        this.author = author;
+        this.type = type;
+        this.location = location;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -49,14 +65,6 @@ class Hop {
         return result;
     }
 
-    public Hop(String _id, String title, String author, Type type, String location) {
-        this._id = _id;
-        this.title = title;
-        this.author = author;
-        this.type = type;
-
-        this.location = location;
-    }
 
     public String get_id() {
         return _id;

@@ -18,14 +18,14 @@ public class HopRestController {
     @Autowired
     HopService hopService;
 
-    @RequestMapping(value = "/hop/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/hop/{id}")
     public Hop findById(@PathVariable String id) {
         return hopService.findById(id);
 
     }
 
 
-    @RequestMapping(value = "/hop", method = RequestMethod.GET)
+    @GetMapping(value = "/hop")
     public List<Hop> find(@RequestParam(value = "search4me", required = false) String search4me) {
 
         if (StringUtils.isEmpty(search4me)) {
@@ -39,7 +39,7 @@ public class HopRestController {
 
     }
 
-    @RequestMapping(value = "/hop", method = RequestMethod.POST)
+    @PostMapping(value = "/hop")
     public void create(@RequestParam(value = "title") String title,
                        @RequestParam(value = "author") String author,
                        @RequestParam(value = "type") String type,
@@ -49,7 +49,7 @@ public class HopRestController {
 
     }
 
-    @RequestMapping(value = "/hop/{id}", method = RequestMethod.PUT)
+    @PutMapping(value = "/hop/{id}")
     public void update(@PathVariable String id,
                        @RequestParam(value = "title", defaultValue = "no title") String title,
                        @RequestParam(value = "author", defaultValue = "no author") String author,
@@ -59,7 +59,7 @@ public class HopRestController {
         hopService.replaceOne(id, title, author, Hop.Type.valueOf(type), location);
     }
 
-    @RequestMapping(value = "/hop/{id}", method = RequestMethod.DELETE)
+    @DeleteMapping(value = "/hop/{id}")
     public void delete(@PathVariable String id) {
         hopService.delete(id);
     }
