@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: hops
+mongodb:
+  uri: mongodb://localhost
+  port: 27017
