@@ -16,7 +16,11 @@ import java.util.List;
 public class HopRestController {
 
     @Autowired
-    HopService hopService;
+    private HopService hopService;
+
+    public HopRestController(HopService hopService) {
+        this.hopService = hopService;
+    }
 
     @GetMapping(value = "/hop/{id}")
     public Hop findById(@PathVariable String id) {
@@ -32,10 +36,7 @@ public class HopRestController {
             return hopService.findAll();
         }
 
-        List<Hop> results = hopService.findByTitle(search4me);
-        results.addAll(hopService.findByAuthor(search4me));
-        results.addAll(hopService.findByLocation(search4me));
-        return new ArrayList<Hop>(new HashSet<Hop>(results));
+        return hopService.find(search4me);
 
     }
 
@@ -45,7 +46,7 @@ public class HopRestController {
                        @RequestParam(value = "type") String type,
                        @RequestParam(value = "location") String location) {
 
-        hopService.insertOne(title, author, Hop.Type.valueOf(type), location);
+        hopService.insertOne(new Hop(title, author, type, location));
 
     }
 
@@ -56,7 +57,7 @@ public class HopRestController {
                        @RequestParam(value = "type", defaultValue = "BOOK") String type,
                        @RequestParam(value = "location", defaultValue = "nowhere") String location) {
 
-        hopService.replaceOne(id, title, author, Hop.Type.valueOf(type), location);
+        hopService.replaceOne(id, title, author, type, location);
     }
 
     @DeleteMapping(value = "/hop/{id}")

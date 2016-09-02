@@ -1,5 +1,6 @@
 package org.kj6682.hop;
 
+import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCollection;
@@ -8,37 +9,24 @@ import org.bson.Document;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
+import org.springframework.data.mongodb.core.MongoClientFactoryBean;
+import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 @Configuration
-class MongoConfiguration {
-
-
-    @Value("${mongodb.uri}")
-    String mongoURIString;
-
-    @Value("${mongodb.port}")
-    String mongoPort;
-
-
-    @Bean
-    public MongoClient mongoClient(){
-        String mongoUri = new StringBuilder(mongoURIString).append(":").append(mongoPort).toString();
-        return new MongoClient(new MongoClientURI(mongoUri));
+@EnableMongoRepositories
+class MongoConfiguration extends AbstractMongoConfiguration{
+    @Override
+    public String getDatabaseName() {
+        return "catalog";
     }
 
+    @Override
     @Bean
-    public MongoDatabase mongoDatabase(){
-        return mongoClient().getDatabase("catalog");
-    }
-
-    @Bean
-    public MongoCollection<Document> hopCollection(){
-        return mongoDatabase().getCollection("hop");
-    }
-
-    @Bean
-    public HopService hopService(){
-        return new HopServiceMongoImpl(hopCollection());
+    public Mongo mongo() throws Exception {
+        return new MongoClient("localhost" , 27017 );
     }
 
 }

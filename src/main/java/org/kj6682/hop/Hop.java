@@ -1,5 +1,8 @@
 package org.kj6682.hop;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.TextIndexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.util.Assert;
 
 /**
@@ -7,67 +10,71 @@ import org.springframework.util.Assert;
  *
  * This model object guarantees the minimal required information per document on the server side.
  *
- *
+ * MongoDB stores data in collections.
+ * Spring Data MongoDB will map the class Hop into a collection called hop.
+ * If you want to change the name of the collection, you can use
+ * Spring Data MongoDB’s @Document annotation on the class.
  */
+
+@Document(collection = "hop")
+
 class Hop {
 
     static enum Type {
         AUDIO, BOOK, MOVIE;
     }
 
-    private final String _id;
 
-    private final String title;
+    @Id
+    private String id;
 
-    private final String author;
+    @TextIndexed
+    private String title;
 
-    private final Type type;
+    @TextIndexed
+    private String author;
 
-    private final String location;
+    @TextIndexed
+    private  String type;
 
+    public void setId(String id) {
+        this.id = id;
+    }
 
-    public Hop(String _id, String title, String author, Type type, String location) {
-        Assert.hasLength(_id, "A not empty _id is necessary when creating a Hop");
-        Assert.hasLength(title, "A reasonable title is necessary when creating a Hop");
-        Assert.notNull(type, "A strict type is necessary when creating a Hop");
-        Assert.hasLength(author, "A Hop needs an author");
-        Assert.hasLength(location, "A Hop is needless without a location");
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-        this._id = _id;
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    @TextIndexed
+
+    private  String location;
+
+    public Hop(String title, String author, String type, String location) {
+//        Assert.hasLength(title, "A reasonable title is necessary when creating a Hop");
+//        Assert.hasLength(type, "A strict type is necessary when creating a Hop");
+//        Assert.hasLength(author, "A Hop needs an author");
+//        Assert.hasLength(location, "A Hop is needless without a location");
+
         this.title = title;
         this.author = author;
         this.type = type;
         this.location = location;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Hop)) return false;
-
-        Hop hop = (Hop) o;
-
-        if (get_id() != null ? !get_id().equals(hop.get_id()) : hop.get_id() != null) return false;
-        if (getTitle() != null ? !getTitle().equals(hop.getTitle()) : hop.getTitle() != null) return false;
-        if (getAuthor() != null ? !getAuthor().equals(hop.getAuthor()) : hop.getAuthor() != null) return false;
-        if (getType() != hop.getType()) return false;
-        return getLocation() != null ? getLocation().equals(hop.getLocation()) : hop.getLocation() == null;
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = get_id() != null ? get_id().hashCode() : 0;
-        result = 31 * result + (getTitle() != null ? getTitle().hashCode() : 0);
-        result = 31 * result + (getAuthor() != null ? getAuthor().hashCode() : 0);
-        result = 31 * result + (getType() != null ? getType().hashCode() : 0);
-        result = 31 * result + (getLocation() != null ? getLocation().hashCode() : 0);
-        return result;
-    }
-
-
-    public String get_id() {
-        return _id;
+    public String getId() {
+        return id;
     }
 
     public String getTitle() {
@@ -78,11 +85,49 @@ class Hop {
         return author;
     }
 
-    public Type getType() {
+    public String getType() {
         return type;
     }
 
     public String getLocation() {
         return location;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Hop)) return false;
+
+        Hop hop = (Hop) o;
+
+        if (!getId().equals(hop.getId())) return false;
+        if (!getTitle().equals(hop.getTitle())) return false;
+        if (!getAuthor().equals(hop.getAuthor())) return false;
+        if (!getType().equals(hop.getType())) return false;
+        return getLocation().equals(hop.getLocation());
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getId().hashCode();
+        result = 31 * result + getTitle().hashCode();
+        result = 31 * result + getAuthor().hashCode();
+        result = 31 * result + getType().hashCode();
+        result = 31 * result + getLocation().hashCode();
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Hop{");
+        sb.append("id='").append(id).append('\'');
+        sb.append(", title='").append(title).append('\'');
+        sb.append(", author='").append(author).append('\'');
+        sb.append(", type='").append(type).append('\'');
+        sb.append(", location='").append(location).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }

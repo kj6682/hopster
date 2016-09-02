@@ -1,4 +1,4 @@
-package org.kj6682;
+package org.kj6682.hop;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
