@@ -1,9 +1,14 @@
 package org.kj6682.hop;
 
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.TextCriteria;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -14,13 +19,37 @@ class HopService {
 
     @Autowired
     private HopRepository hopRepository;
+    @Autowired
+    MongoOperations operations;
 
     public Hop findById(String id) {
         return hopRepository.findOne(id);
     }
 
     public List<Hop> findAll() {
-        return hopRepository.findAll();
+        //return hopRepository.findAll();
+        List<Hop> hops = new LinkedList<>();
+        DBCursor cursor = operations.getCollection("hop")
+                .find(new BasicDBObject());
+
+        try {
+            while (cursor.hasNext()) {
+
+                DBObject dbo = cursor.next();
+                try {
+                    Hop hop = new Hop(dbo.get("_id").toString(), dbo.get("title").toString(), dbo.get("author").toString(), dbo.get("type").toString(), dbo.get("location").toString());
+                    hops.add(hop);
+                } catch (Throwable t) {
+                    //just skip this element
+                    System.out.println(t);
+                }
+
+            }
+        } finally {
+            cursor.close();
+        }
+        return hops;
+
     }
 
 

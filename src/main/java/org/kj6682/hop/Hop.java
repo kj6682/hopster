@@ -61,12 +61,32 @@ class Hop {
 
     private  String location;
 
-    public Hop(String title, String author, String type, String location) {
-//        Assert.hasLength(title, "A reasonable title is necessary when creating a Hop");
-//        Assert.hasLength(type, "A strict type is necessary when creating a Hop");
-//        Assert.hasLength(author, "A Hop needs an author");
-//        Assert.hasLength(location, "A Hop is needless without a location");
+    //JPA mess needs this empty constructor
+    public Hop(){};
 
+    //I use this constructor to add an object
+    public Hop(String title, String author, String type, String location) {
+        Assert.hasLength(title, "A reasonable title is necessary when creating a Hop");
+        Assert.hasLength(type, "A strict type is necessary when creating a Hop");
+        Assert.hasLength(author, "A Hop needs an author");
+        Assert.hasLength(location, "A Hop is needless without a location");
+
+        this.title = title;
+        this.author = author;
+        this.type = type;
+        this.location = location;
+    }
+
+    //When I read from a collection I want to use this to be sure the mandatory fields are ok
+    //(but I need to filter the query manually)
+    public Hop(String id, String title, String author, String type, String location) {
+        Assert.hasLength(id, "must have an id");
+        Assert.hasLength(title, "A reasonable title is necessary when creating a Hop");
+        Assert.hasLength(type, "A strict type is necessary when creating a Hop");
+        Assert.hasLength(author, "A Hop needs an author");
+        Assert.hasLength(location, "A Hop is needless without a location");
+
+        this.id = id;
         this.title = title;
         this.author = author;
         this.type = type;
