@@ -46,7 +46,7 @@ public class HopRestController {
                        @RequestParam(value = "type") String type,
                        @RequestParam(value = "location") String location) {
 
-        hopService.insertOne(new Hop(title, author, type, location));
+        hopService.insertOne(title, author, type, location);
 
     }
 

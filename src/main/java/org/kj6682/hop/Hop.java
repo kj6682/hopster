@@ -38,22 +38,27 @@ class Hop {
     private  String type;
 
     public void setId(String id) {
+        Assert.hasLength(id, "id must not be empty");
         this.id = id;
     }
 
     public void setTitle(String title) {
+        Assert.hasLength(title, "A reasonable title is necessary when creating a Hop");
         this.title = title;
     }
 
     public void setAuthor(String author) {
+        Assert.hasLength(author, "A Hop needs an author");
         this.author = author;
     }
 
     public void setType(String type) {
+        Assert.hasLength(type, "A strict type is necessary when creating a Hop");
         this.type = type;
     }
 
     public void setLocation(String location) {
+        Assert.hasLength(location, "A Hop is needless without a location");
         this.location = location;
     }
 
@@ -64,34 +69,6 @@ class Hop {
     //JPA mess needs this empty constructor
     public Hop(){};
 
-    //I use this constructor to add an object
-    public Hop(String title, String author, String type, String location) {
-        Assert.hasLength(title, "A reasonable title is necessary when creating a Hop");
-        Assert.hasLength(type, "A strict type is necessary when creating a Hop");
-        Assert.hasLength(author, "A Hop needs an author");
-        Assert.hasLength(location, "A Hop is needless without a location");
-
-        this.title = title;
-        this.author = author;
-        this.type = type;
-        this.location = location;
-    }
-
-    //When I read from a collection I want to use this to be sure the mandatory fields are ok
-    //(but I need to filter the query manually)
-    public Hop(String id, String title, String author, String type, String location) {
-        Assert.hasLength(id, "must have an id");
-        Assert.hasLength(title, "A reasonable title is necessary when creating a Hop");
-        Assert.hasLength(type, "A strict type is necessary when creating a Hop");
-        Assert.hasLength(author, "A Hop needs an author");
-        Assert.hasLength(location, "A Hop is needless without a location");
-
-        this.id = id;
-        this.title = title;
-        this.author = author;
-        this.type = type;
-        this.location = location;
-    }
 
     public String getId() {
         return id;

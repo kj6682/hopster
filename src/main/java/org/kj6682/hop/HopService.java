@@ -37,7 +37,12 @@ class HopService {
 
                 DBObject dbo = cursor.next();
                 try {
-                    Hop hop = new Hop(dbo.get("_id").toString(), dbo.get("title").toString(), dbo.get("author").toString(), dbo.get("type").toString(), dbo.get("location").toString());
+                    Hop hop = new Hop();
+                    hop.setId(dbo.get("_id").toString());
+                    hop.setTitle(dbo.get("title").toString());
+                    hop.setAuthor(dbo.get("author").toString());
+                    hop.setType(dbo.get("type").toString());
+                    hop.setLocation(dbo.get("location").toString());
                     hops.add(hop);
                 } catch (Throwable t) {
                     //just skip this element
@@ -58,7 +63,12 @@ class HopService {
         return hopRepository.findAllBy(criteria);
     }
 
-    public void insertOne(Hop hop) {
+    public void insertOne(String title, String author, String type, String location) {
+        Hop hop = new Hop();
+        hop.setTitle(title);
+        hop.setAuthor(author);
+        hop.setType(type);
+        hop.setLocation(location);
         hopRepository.save(hop);
     }
 
