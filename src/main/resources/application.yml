@@ -2,5 +2,5 @@ spring:
   application:
     name: hops
 mongodb:
-  uri: mongodb://localhost
+  server: localhost
   port: 27017

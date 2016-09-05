@@ -18,6 +18,13 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @Configuration
 @EnableMongoRepositories
 class MongoConfiguration extends AbstractMongoConfiguration{
+
+    @Value("${mongodb.server}")
+    private String server;
+
+    @Value("${mongodb.port}")
+    private Integer port;
+
     @Override
     public String getDatabaseName() {
         return "catalog";
@@ -26,7 +33,7 @@ class MongoConfiguration extends AbstractMongoConfiguration{
     @Override
     @Bean
     public Mongo mongo() throws Exception {
-        return new MongoClient("localhost" , 27017 );
+        return new MongoClient(server, port );
     }
 
 }

@@ -1,14 +1,7 @@
 package org.kj6682.hop;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoOperations;
-import org.springframework.data.mongodb.core.query.TextCriteria;
 import org.springframework.stereotype.Service;
-
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -19,8 +12,6 @@ class HopService {
 
     @Autowired
     private HopRepository hopRepository;
-    @Autowired
-    MongoOperations operations;
 
     public Hop findById(String id) {
         return hopRepository.findOne(id);
