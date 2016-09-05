@@ -37,6 +37,10 @@ class Hop {
     @TextIndexed
     private  String type;
 
+    @TextIndexed
+
+    private  String location;
+
     public void setId(String id) {
         Assert.hasLength(id, "id must not be empty");
         this.id = id;
@@ -61,13 +65,6 @@ class Hop {
         Assert.hasLength(location, "A Hop is needless without a location");
         this.location = location;
     }
-
-    @TextIndexed
-
-    private  String location;
-
-    //JPA mess needs this empty constructor
-    public Hop(){};
 
 
     public String getId() {
