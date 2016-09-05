@@ -24,43 +24,16 @@ class HopService {
 
     public Hop findById(String id) {
         return hopRepository.findOne(id);
+
     }
 
     public List<Hop> findAll() {
-        //return hopRepository.findAll();
-        List<Hop> hops = new LinkedList<>();
-        DBCursor cursor = operations.getCollection("hop")
-                .find(new BasicDBObject());
-
-        try {
-            while (cursor.hasNext()) {
-
-                DBObject dbo = cursor.next();
-                try {
-                    Hop hop = new Hop();
-                    hop.setId(dbo.get("_id").toString());
-                    hop.setTitle(dbo.get("title").toString());
-                    hop.setAuthor(dbo.get("author").toString());
-                    hop.setType(dbo.get("type").toString());
-                    hop.setLocation(dbo.get("location").toString());
-                    hops.add(hop);
-                } catch (Throwable t) {
-                    //just skip this element
-                    System.out.println(t);
-                }
-
-            }
-        } finally {
-            cursor.close();
-        }
-        return hops;
-
+        return hopRepository.findAll();
     }
 
 
     public List<Hop> find(String search4me) {
-        TextCriteria criteria = TextCriteria.forDefaultLanguage().matchingAny(search4me);
-        return hopRepository.findAllBy(criteria);
+       return hopRepository.searchFor(search4me);
     }
 
     public void insertOne(String title, String author, String type, String location) {
