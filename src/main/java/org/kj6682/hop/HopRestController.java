@@ -12,10 +12,8 @@ import java.util.List;
  * Created by luigi on 29/08/16.
  */
 @RestController
-//@RequestMapping("/hop")
 public class HopRestController {
 
-    @Autowired
     private HopService hopService;
 
     public HopRestController(HopService hopService) {

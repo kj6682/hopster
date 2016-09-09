@@ -25,9 +25,13 @@ class MongoConfiguration extends AbstractMongoConfiguration{
     @Value("${mongodb.port}")
     private Integer port;
 
+    @Value("${mongodb.database-name}")
+    private String databaseName;
+
+
     @Override
     public String getDatabaseName() {
-        return "catalog";
+        return databaseName;
     }
 
     @Override
