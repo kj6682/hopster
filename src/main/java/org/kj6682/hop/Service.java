@@ -1,17 +1,27 @@
 package org.kj6682.hop;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+
+
 import java.util.List;
 
 /**
  * Created by luigi on 29/08/16.
  */
-@Service
-class HopService {
+@org.springframework.stereotype.Service
+class Service {
+
+    static interface AbstractRepository {
+        public Hop findOne(String id);
+        public List<Hop> searchFor(String text);
+        public List<Hop> findAll();
+        public Hop save(Hop hop);
+        public void delete(String id);
+
+    }
 
     @Autowired
-    private HopRepository hopRepository;
+    private AbstractRepository hopRepository;
 
     public Hop findById(String id) {
         return hopRepository.findOne(id);

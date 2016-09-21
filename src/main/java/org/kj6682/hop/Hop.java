@@ -38,7 +38,6 @@ class Hop {
     private  String type;
 
     @TextIndexed
-
     private  String location;
 
     public void setId(String id) {

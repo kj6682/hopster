@@ -1,22 +1,19 @@
 package org.kj6682.hop;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 /**
  * Created by luigi on 29/08/16.
  */
-@RestController
-public class HopRestController {
+@org.springframework.web.bind.annotation.RestController
+public class RestController {
 
-    private HopService hopService;
+    private Service hopService;
 
-    public HopRestController(HopService hopService) {
+    public RestController(Service hopService) {
         this.hopService = hopService;
     }
 

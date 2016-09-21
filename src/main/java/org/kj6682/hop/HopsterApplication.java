@@ -10,11 +10,4 @@ public class HopsterApplication {
 		SpringApplication.run(HopsterApplication.class, args);
 	}
 
-    static class HopNotFoundException extends RuntimeException {
-        HopNotFoundException(String id) {
-            super("could not find documents for '" + id + "'.");
-        }
-
-    }//:)
-
 }

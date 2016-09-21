@@ -16,13 +16,13 @@ import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.*;
 
 
-public class HopRestControllerTest {
+public class RestControllerTest {
 
     private static final Logger logger =
-            LoggerFactory.getLogger(HopRestControllerTest.class);
+            LoggerFactory.getLogger(RestControllerTest.class);
 
     @Mock
-    HopService hopService;
+    Service hopService;
 
 
     @Before
@@ -39,7 +39,7 @@ public class HopRestControllerTest {
     public void findById_OK() {
 
         when(hopService.findById(anyString())).thenReturn(getHop());
-        HopRestController controller = new HopRestController(hopService);
+        RestController controller = new RestController(hopService);
 
         assertNotNull(controller.findById("id"));
         logger.info("findById_OK");
@@ -49,7 +49,7 @@ public class HopRestControllerTest {
     public void findById_NO_RESULTS() {
 
         when(hopService.findById(anyString())).thenReturn(null);
-        HopRestController controller = new HopRestController(hopService);
+        RestController controller = new RestController(hopService);
 
         assertNull(controller.findById("id"));
         logger.info("findById_NO_RESULTS");
@@ -62,7 +62,7 @@ public class HopRestControllerTest {
         when(hopService.find("search4me")).thenReturn(listHops());
         when(hopService.findAll()).thenReturn(listHops());
 
-        HopRestController controller = new HopRestController(hopService);
+        RestController controller = new RestController(hopService);
 
         assertNotNull(controller.find(""));
         verify(hopService, only()).findAll();
@@ -77,7 +77,7 @@ public class HopRestControllerTest {
         when(hopService.find("search4me")).thenReturn(listHops());
         when(hopService.findAll()).thenReturn(listHops());
 
-        HopRestController controller = new HopRestController(hopService);
+        RestController controller = new RestController(hopService);
 
         assertNotNull(controller.find("search4me"));
         verify(hopService, only()).find(anyString());
@@ -89,7 +89,7 @@ public class HopRestControllerTest {
 
     @Test
     public void insert(){
-        HopRestController controller = new HopRestController(hopService);
+        RestController controller = new RestController(hopService);
 
         controller.create("title", "author", "book", "nowhere");
         verify(hopService, only()).insertOne(anyString(), anyString(), anyString(), anyString());
@@ -99,7 +99,7 @@ public class HopRestControllerTest {
 
     @Test
     public void update(){
-        HopRestController controller = new HopRestController(hopService);
+        RestController controller = new RestController(hopService);
 
         controller.update("id", "title", "author", "book", "nowhere");
         verify(hopService, only()).replaceOne(anyString(), anyString(), anyString(), anyString(), anyString());
@@ -109,7 +109,7 @@ public class HopRestControllerTest {
 
     @Test
     public void delete(){
-        HopRestController controller = new HopRestController(hopService);
+        RestController controller = new RestController(hopService);
 
         controller.delete("id");
         verify(hopService, only()).delete(anyString());
