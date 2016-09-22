@@ -17,7 +17,6 @@ import org.springframework.util.Assert;
  */
 
 @Document(collection = "hop")
-
 class Hop {
 
     static enum Type {

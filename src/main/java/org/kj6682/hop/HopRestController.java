@@ -7,36 +7,42 @@ import java.util.List;
 
 /**
  * Created by luigi on 29/08/16.
+ *
+ * As its names states clearly, this class is the RestController for the Hop application.
+ * In case the hopster microservice should provide also other interfaces, by mvc and templates for instance,
+ * we will provide the appropriated controller.
+ *
+ * This class wraps the service and exposes it in a defined protocol to clients.
+ *
+ * No business logic must be implemented in this class.
+ *
+ * It is not necessary to expose this class as public, so keep it package private.
  */
-@org.springframework.web.bind.annotation.RestController
-public class RestController {
+@RestController
+class HopRestController {
 
-    private Service hopService;
+    private HopService hopService;
 
-    public RestController(Service hopService) {
+    HopRestController(HopService hopService) {
         this.hopService = hopService;
     }
 
     @GetMapping(value = "/hop/{id}")
-    public Hop findById(@PathVariable String id) {
+    Hop findById(@PathVariable String id) {
         return hopService.findById(id);
 
     }
 
 
     @GetMapping(value = "/hop")
-    public List<Hop> find(@RequestParam(value = "search4me", required = false) String search4me) {
-
-        if (StringUtils.isEmpty(search4me)) {
-            return hopService.findAll();
-        }
+    List<Hop> find(@RequestParam(value = "search4me", required = false) String search4me) {
 
         return hopService.find(search4me);
 
     }
 
     @PostMapping(value = "/hop")
-    public void create(@RequestParam(value = "title") String title,
+    void create(@RequestParam(value = "title") String title,
                        @RequestParam(value = "author") String author,
                        @RequestParam(value = "type") String type,
                        @RequestParam(value = "location") String location) {
@@ -46,7 +52,7 @@ public class RestController {
     }
 
     @PutMapping(value = "/hop/{id}")
-    public void update(@PathVariable String id,
+    void update(@PathVariable String id,
                        @RequestParam(value = "title", defaultValue = "no title") String title,
                        @RequestParam(value = "author", defaultValue = "no author") String author,
                        @RequestParam(value = "type", defaultValue = "BOOK") String type,
@@ -56,9 +62,8 @@ public class RestController {
     }
 
     @DeleteMapping(value = "/hop/{id}")
-    public void delete(@PathVariable String id) {
+    void delete(@PathVariable String id) {
         hopService.delete(id);
     }
-
 
 }
