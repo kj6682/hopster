@@ -15,11 +15,14 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.*;
 
-
-public class RestControllerTest {
+/**
+ * On the controller junit test there is no much to test actually.
+ *
+ */
+public class HopRestControllerTest {
 
     private static final Logger logger =
-            LoggerFactory.getLogger(RestControllerTest.class);
+            LoggerFactory.getLogger(HopRestControllerTest.class);
 
     @Mock
     HopService hopService;
@@ -59,31 +62,16 @@ public class RestControllerTest {
     @Test
     public void find_OK() {
 
-        when(hopService.find("search4me")).thenReturn(listHops());
-        when(hopService.findAll()).thenReturn(listHops());
+        when(hopService.find(anyString())).thenReturn(listHops());
 
         HopRestController controller = new HopRestController(hopService);
 
         assertNotNull(controller.find(""));
-        verify(hopService, only()).findAll();
-        verify(hopService, never()).find(anyString());
 
-        logger.info("find_OK");
-    }
-
-    @Test
-    public void find_search4me_OK() {
-
-        when(hopService.find("search4me")).thenReturn(listHops());
-        when(hopService.findAll()).thenReturn(listHops());
-
-        HopRestController controller = new HopRestController(hopService);
-
-        assertNotNull(controller.find("search4me"));
         verify(hopService, only()).find(anyString());
         verify(hopService, never()).findAll();
 
-        logger.info("find_search4me_OK");
+        logger.info("find_OK");
     }
 
 

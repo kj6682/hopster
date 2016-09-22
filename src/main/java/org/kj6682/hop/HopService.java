@@ -17,9 +17,13 @@ import java.util.List;
 @Service
 class HopService {
 
-    @Autowired
+
     private HopRepository hopRepository;
 
+    @Autowired
+    void setHopRepository(HopRepository hopRepository){
+        this.hopRepository = hopRepository;
+    }
     Hop findById(String id) {
         return hopRepository.findOne(id);
 
