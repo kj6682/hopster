@@ -6,7 +6,7 @@
     <groupId>org.kj6682</groupId>
     <artifactId>hopster</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
     <name>hopster</name>
     <description>hopsters are not hipsters</description>
@@ -18,6 +18,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
+    <modules>
+        <module>hop</module>
+        <module>frigo</module>
+    </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>

@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: katering
+  jackson:
+    serializazion:
+      WRITE_DATES_AS_TIMESTAMPS : false
+server:
+    port: 8081
+mongodb:
+  server: localhost
+  port: 27017
+  name : catalog
