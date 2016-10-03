@@ -77,6 +77,12 @@ class FrigoRestController {
 
     }
 
+    @GetMapping(value = "/frigo", headers = "frigo.version=v0")
+    ResponseEntity<List<Frigo>> findVeryOldVersion(@RequestParam(value = "search4me", required = false) String search4me) {
+
+        throw new UnsupportedOperationException("sorry mate, this operation is no more supported.");
+    }
+
     @PostMapping(value = "/frigo")
     void create(@RequestParam(value = "name") String title,
                 @RequestParam(value = "since") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate since,
