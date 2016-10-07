@@ -47,41 +47,6 @@ class FrigoRestController {
 
     }
 
-    /**
-     * In order to use this demo method for vesioning with custom headers, try :
-     *
-     * curl --header "frigo.version:v2" "http://localhost:8081/frigo
-     *
-     *
-     * @param search4me
-     * @return
-     */
-    @GetMapping(value = "/frigo", headers = "frigo.version=v2")
-    ResponseEntity<List<Frigo>> findWithHeaders(@RequestParam(value = "search4me", required = false) String search4me) {
-
-        HttpHeaders headers = new HttpHeaders();
-        List<MediaType> l = new LinkedList<MediaType>();
-
-        headers.set("frigo.version","v2");
-
-        Frigo dummyFrigo = new Frigo();
-        dummyFrigo.setId("*** dummy frigo idem ***");
-        dummyFrigo.setName("This instance is accessible only in version 2");
-        dummyFrigo.setQuantity(0);
-        dummyFrigo.setBestBefore(LocalDate.MAX);
-        dummyFrigo.setSince(LocalDate.now());
-        List<Frigo> frigos = frigoService.find(search4me);
-        frigos.add(dummyFrigo);
-
-        return new ResponseEntity<List<Frigo>>(frigos, headers, HttpStatus.OK);
-
-    }
-
-    @GetMapping(value = "/frigo", headers = "frigo.version=v0")
-    ResponseEntity<List<Frigo>> findVeryOldVersion(@RequestParam(value = "search4me", required = false) String search4me) {
-
-        throw new UnsupportedOperationException("sorry mate, this operation is no more supported.");
-    }
 
     @PostMapping(value = "/frigo")
     void create(@RequestParam(value = "name") String title,
