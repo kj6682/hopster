@@ -38,7 +38,7 @@ class FrigoRestController {
 
 
     @GetMapping(value = "/frigo")
-    @ApiImplicitParams({@ApiImplicitParam(name = "frigo.version", required = true, dataType = "string", paramType = "header")})
+    @ApiImplicitParams({@ApiImplicitParam(name = "frigo.version", required = false, dataType = "string", paramType = "header")})
     List<Frigo> find(@RequestParam(value = "search4me", required = false) String search4me) {
 
         return frigoService.find(search4me);

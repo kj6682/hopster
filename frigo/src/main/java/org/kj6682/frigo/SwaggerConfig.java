@@ -13,7 +13,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SwaggerConfig {                                    
     @Bean
     public Docket currentApi() {
-        return new Docket(DocumentationType.SWAGGER_2).groupName("present-api")
+        return new Docket(DocumentationType.SWAGGER_2).groupName("frigo-api-v1")
           .select()                                  
           .apis(RequestHandlerSelectors.withClassAnnotation(ApiV1.class))
           .paths(PathSelectors.any())
@@ -21,7 +21,7 @@ public class SwaggerConfig {
     }
     @Bean
     public Docket oldApi() {
-        return new Docket(DocumentationType.SWAGGER_2).groupName("past-api")
+        return new Docket(DocumentationType.SWAGGER_2).groupName("frigo-api-v0")
                 .select()
                 .apis(RequestHandlerSelectors.withClassAnnotation(ApiV0.class))
                 .paths(PathSelectors.any())
@@ -29,7 +29,7 @@ public class SwaggerConfig {
     }
     @Bean
     public Docket unstableApi() {
-        return new Docket(DocumentationType.SWAGGER_2).groupName("future-api")
+        return new Docket(DocumentationType.SWAGGER_2).groupName("frigo-api-v2")
                 .select()
                 .apis(RequestHandlerSelectors.withClassAnnotation(ApiV2.class))
                 .paths(PathSelectors.any())
