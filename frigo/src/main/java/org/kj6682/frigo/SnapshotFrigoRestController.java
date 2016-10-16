@@ -16,6 +16,7 @@ import java.util.List;
 /**
  * Created by luigi on 07/10/2016.
  */
+@FutureApi
 @RestController
 public class SnapshotFrigoRestController {
 

@@ -12,11 +12,27 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfig {                                    
     @Bean
-    public Docket api() { 
-        return new Docket(DocumentationType.SWAGGER_2)
+    public Docket currentApi() {
+        return new Docket(DocumentationType.SWAGGER_2).groupName("present-api")
           .select()                                  
-          .apis(RequestHandlerSelectors.any())
+          .apis(RequestHandlerSelectors.withClassAnnotation(PresentApi.class))
           .paths(PathSelectors.any())
-          .build();                                           
+          .build();
+    }
+    @Bean
+    public Docket oldApi() {
+        return new Docket(DocumentationType.SWAGGER_2).groupName("past-api")
+                .select()
+                .apis(RequestHandlerSelectors.withClassAnnotation(PastApi.class))
+                .paths(PathSelectors.any())
+                .build();
+    }
+    @Bean
+    public Docket unstableApi() {
+        return new Docket(DocumentationType.SWAGGER_2).groupName("future-api")
+                .select()
+                .apis(RequestHandlerSelectors.withClassAnnotation(FutureApi.class))
+                .paths(PathSelectors.any())
+                .build();
     }
 }
