@@ -1,5 +1,7 @@
 package org.kj6682.frigo;
 
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -16,9 +18,9 @@ import java.util.List;
 /**
  * Created by luigi on 07/10/2016.
  */
-@FutureApi
+@ApiV2
 @RestController
-public class SnapshotFrigoRestController {
+public class FrigoRestControllerV2 {
 
     @Autowired
     private FrigoService frigoService;
@@ -32,6 +34,7 @@ public class SnapshotFrigoRestController {
      * @param search4me
      * @return
      */
+    @ApiImplicitParams({@ApiImplicitParam(name = "frigo.version", required = true, dataType = "string", paramType = "header")})
     @GetMapping(value = "/frigo", headers = "frigo.version=v2")
     ResponseEntity<List<Frigo>> findWithHeaders(@RequestParam(value = "search4me", required = false) String search4me) {
 

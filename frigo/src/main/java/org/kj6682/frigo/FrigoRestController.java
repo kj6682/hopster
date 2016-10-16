@@ -1,5 +1,7 @@
 package org.kj6682.frigo;
 
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +22,7 @@ import java.util.List;
  * <p>
  * It is not necessary to expose this class as public, so keep it package private.
  */
-@PresentApi
+@ApiV1
 @RestController
 class FrigoRestController {
 
@@ -36,6 +38,7 @@ class FrigoRestController {
 
 
     @GetMapping(value = "/frigo")
+    @ApiImplicitParams({@ApiImplicitParam(name = "frigo.version", required = true, dataType = "string", paramType = "header")})
     List<Frigo> find(@RequestParam(value = "search4me", required = false) String search4me) {
 
         return frigoService.find(search4me);

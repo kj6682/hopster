@@ -1,5 +1,7 @@
 package org.kj6682.frigo;
 
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiParam;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,10 +13,11 @@ import java.util.List;
 /**
  * Created by luigi on 07/10/2016.
  */
-@PastApi
+@ApiV0
 @RestController
-public class DeprecatedFrigoRestController {
+public class FrigoRestControllerV0 {
     @ApiParam()
+    @ApiImplicitParams({@ApiImplicitParam(name = "frigo.version", required = true, dataType = "string", paramType = "header")})
     @GetMapping(value = "/frigo", headers = "frigo.version=v0")
     ResponseEntity<List<Frigo>> findVeryOldVersion(@RequestParam(value = "search4me", required = false) String search4me) {
 

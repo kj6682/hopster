@@ -15,7 +15,7 @@ public class SwaggerConfig {
     public Docket currentApi() {
         return new Docket(DocumentationType.SWAGGER_2).groupName("present-api")
           .select()                                  
-          .apis(RequestHandlerSelectors.withClassAnnotation(PresentApi.class))
+          .apis(RequestHandlerSelectors.withClassAnnotation(ApiV1.class))
           .paths(PathSelectors.any())
           .build();
     }
@@ -23,7 +23,7 @@ public class SwaggerConfig {
     public Docket oldApi() {
         return new Docket(DocumentationType.SWAGGER_2).groupName("past-api")
                 .select()
-                .apis(RequestHandlerSelectors.withClassAnnotation(PastApi.class))
+                .apis(RequestHandlerSelectors.withClassAnnotation(ApiV0.class))
                 .paths(PathSelectors.any())
                 .build();
     }
@@ -31,7 +31,7 @@ public class SwaggerConfig {
     public Docket unstableApi() {
         return new Docket(DocumentationType.SWAGGER_2).groupName("future-api")
                 .select()
-                .apis(RequestHandlerSelectors.withClassAnnotation(FutureApi.class))
+                .apis(RequestHandlerSelectors.withClassAnnotation(ApiV2.class))
                 .paths(PathSelectors.any())
                 .build();
     }
