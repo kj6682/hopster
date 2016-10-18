@@ -1,6 +1,8 @@
 spring:
   application:
     name: hops
+server:
+    port: 8082
 mongodb:
   server: localhost
   port: 27017

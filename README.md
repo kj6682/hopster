@@ -4,6 +4,11 @@
 
 This hopster has two submodules:
 
+##business services
 * **hop** (a services for media stuff)
 * **frigo** (a service for storing stuff with an expiring date)
+
+##technical services
+* **gateway** (a zuul service gateway)
+
 
