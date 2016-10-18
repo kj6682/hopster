@@ -20,7 +20,7 @@ import java.util.List;
  */
 @ApiV2
 @RestController
-public class FrigoRestControllerV2 {
+class FrigoRestControllerV2 {
 
     @Autowired
     private FrigoService frigoService;

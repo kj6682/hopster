@@ -15,7 +15,7 @@ import java.util.List;
  */
 @ApiV0
 @RestController
-public class FrigoRestControllerV0 {
+class FrigoRestControllerV0 {
     @ApiParam()
     @ApiImplicitParams({@ApiImplicitParam(name = "frigo.version", required = true, dataType = "string", paramType = "header")})
     @GetMapping(value = "/frigo", headers = "frigo.version=v0")
