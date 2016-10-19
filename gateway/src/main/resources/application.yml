@@ -7,10 +7,12 @@ zuul:
   routes:
     frigo:
       path: /frigo/**
-      url: http://localhost:8081/frigo
+      url: http://localhost:8081/
+      stripPrefix: false
     hops:
       path: /hop/**
-      url: http://localhost:8082/hop
+      url: http://localhost:8082/
+      stripPrefix: false
 ribbon:
   eureka:
     enabled: false
