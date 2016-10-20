@@ -12,3 +12,7 @@ This hopster has two submodules:
 * **gateway** (a zuul service gateway)
 
 
+### Notes
+when performing release remember to skip deployment 
+
+```mvn release:perform -Darguments="-Dmaven.deploy.skip=true```
