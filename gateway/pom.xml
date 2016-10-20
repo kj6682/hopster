@@ -12,13 +12,18 @@
     <groupId>org.kj6682</groupId>
     <artifactId>gateway</artifactId>
 
+    <scm>
+        <url>https://github.com/kj6682/hopster</url>
+        <connection>scm:git:https://github.com/kj6682/hopster.git</connection>
+        <developerConnection>scm:git:git@github.com:kj6682/hopster.git</developerConnection>
+    </scm>
+
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-zuul</artifactId>
         </dependency>
-
 
     </dependencies>
 

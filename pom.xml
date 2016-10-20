@@ -31,10 +31,9 @@
         <github-repo>hopster</github-repo>
     </properties>
     <scm>
-        <connection>scm:git:https://github.com/${github-user}/${github-repo}.git</connection>
-        <developerConnection>scm:git:git@github.com:${github-user}/${github-repo}.git</developerConnection>
-        <url>https://github.com/${github-user}/${github-repo}</url>
-        <tag>HEAD</tag>
+        <url>https://github.com/kj6682/hopster</url>
+        <connection>scm:git:https://github.com/kj6682/hopster.git</connection>
+        <developerConnection>scm:git:git@github.com:kj6682/hopster.git</developerConnection>
     </scm>
 
     <dependencies>

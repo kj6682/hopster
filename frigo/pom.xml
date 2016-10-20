@@ -11,6 +11,12 @@
 
     <artifactId>frigo</artifactId>
 
+    <scm>
+        <url>https://github.com/kj6682/hopster</url>
+        <connection>scm:git:https://github.com/kj6682/hopster.git</connection>
+        <developerConnection>scm:git:git@github.com:kj6682/hopster.git</developerConnection>
+    </scm>
+
     <dependencies>
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
