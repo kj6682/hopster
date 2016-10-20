@@ -3,7 +3,7 @@
     <parent>
         <artifactId>hopster</artifactId>
         <groupId>org.kj6682</groupId>
-        <version>0.0.1</version>
+        <version>0.0.2-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -13,7 +13,7 @@
         <url>https://github.com/kj6682/hopster</url>
         <connection>scm:git:https://github.com/kj6682/hopster.git</connection>
         <developerConnection>scm:git:git@github.com:kj6682/hopster.git</developerConnection>
-      <tag>hopster-0.0.1</tag>
+      <tag>HEAD</tag>
   </scm>
 
 </project>
