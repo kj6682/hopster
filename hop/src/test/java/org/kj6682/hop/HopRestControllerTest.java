@@ -79,7 +79,7 @@ public class HopRestControllerTest {
     public void insert(){
         HopRestController controller = new HopRestController(hopService);
 
-        controller.create("title", "author", "book", "nowhere");
+        controller.create(new Hop());
         verify(hopService, only()).insertOne(anyString(), anyString(), anyString(), anyString());
         logger.info("insert_OK");
 

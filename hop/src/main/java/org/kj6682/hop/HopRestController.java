@@ -19,6 +19,7 @@ import java.util.List;
  * It is not necessary to expose this class as public, so keep it package private.
  */
 @RestController
+@RequestMapping("/api")
 class HopRestController {
 
     private HopService hopService;
@@ -42,12 +43,9 @@ class HopRestController {
     }
 
     @PostMapping(value = "/hop")
-    void create(@RequestParam(value = "title") String title,
-                       @RequestParam(value = "author") String author,
-                       @RequestParam(value = "type") String type,
-                       @RequestParam(value = "location") String location) {
-
-        hopService.insertOne(title, author, type, location);
+    void create(@RequestBody Hop hop) {
+        System.out.println("bloody post" + hop);
+        hopService.insertOne(hop.getTitle(), hop.getAuthor(), hop.getType(), hop.getLocation());
 
     }
 
