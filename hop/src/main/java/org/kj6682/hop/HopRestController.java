@@ -29,7 +29,7 @@ class HopRestController {
     }
 
     @GetMapping(value = "/hop/{id}")
-    Hop findById(@PathVariable String id) {
+    Hop findById(@PathVariable Long id) {
         return hopService.findById(id);
 
     }
@@ -50,7 +50,7 @@ class HopRestController {
     }
 
     @PutMapping(value = "/hop/{id}")
-    void update(@PathVariable String id,
+    void update(@PathVariable Long id,
                        @RequestParam(value = "title", defaultValue = "no title") String title,
                        @RequestParam(value = "author", defaultValue = "no author") String author,
                        @RequestParam(value = "type", defaultValue = "BOOK") String type,
@@ -60,7 +60,7 @@ class HopRestController {
     }
 
     @DeleteMapping(value = "/hop/{id}")
-    void delete(@PathVariable String id) {
+    void delete(@PathVariable Long id) {
         hopService.delete(id);
     }
 

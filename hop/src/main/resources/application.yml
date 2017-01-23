@@ -1,9 +1,15 @@
 spring:
   application:
     name: hops
+  datasource:
+    url: jdbc:postgresql://localhost:5432/catalog
+    username: hr
+    password: hr
+    platform: POSTGRESQL
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
 server:
     port: 8082
-mongodb:
-  server: localhost
-  port: 27017
-  name : catalog
+

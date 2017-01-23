@@ -3,8 +3,8 @@ package org.kj6682.hop;
 import java.util.List;
 
 import org.springframework.context.annotation.Profile;
-import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.mongodb.repository.Query;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 
 /**
  * This is the JPA repository for managing Hops.
@@ -13,11 +13,10 @@ import org.springframework.data.mongodb.repository.Query;
  * In case a different base should be needed, we will provide a specific version of the service
  *
  */
-interface HopRepository extends MongoRepository<Hop, String> {
+interface HopRepository extends CrudRepository<Hop, Long> {
 
-    @Query("{$and:[ {title:{$exists:true}}, {author:{$exists:true}}, {type:{$exists:true}} ]}")
     List<Hop> findAll();
 
-    @Query("{$and:[ { $text: { $search:  ?0  } }, {title:{$exists:true}}, {author:{$exists:true}}, {type:{$exists:true}} ] }")
+    @Query("select u from Hop u where (u.title like %?1%) or (u.author like %?1%)")
     List<Hop> searchFor(String search4me);
 }

@@ -1,9 +1,7 @@
 package org.kj6682.hop;
-
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.TextIndexed;
-import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.util.Assert;
+
+import javax.persistence.*;
 
 /**
  * Created by luigi on 26/08/16.
@@ -16,7 +14,7 @@ import org.springframework.util.Assert;
  * Spring Data MongoDB’s @Document annotation on the class.
  */
 
-@Document(collection = "hop")
+@Entity
 class Hop {
 
     static enum Type {
@@ -25,22 +23,19 @@ class Hop {
 
 
     @Id
-    private String id;
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Long id;
 
-    @TextIndexed
     private String title;
 
-    @TextIndexed
     private String author;
 
-    @TextIndexed
     private  String type;
 
-    @TextIndexed
     private  String location;
 
-    public void setId(String id) {
-        Assert.hasLength(id, "id must not be empty");
+    public void setId(Long id) {
+        //Assert.hasLength(id, "id must not be empty");
         this.id = id;
     }
 
@@ -65,7 +60,7 @@ class Hop {
     }
 
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 

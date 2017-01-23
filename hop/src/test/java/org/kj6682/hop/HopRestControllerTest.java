@@ -41,20 +41,20 @@ public class HopRestControllerTest {
     @Test
     public void findById_OK() {
 
-        when(hopService.findById(anyString())).thenReturn(getHop());
+        when(hopService.findById(anyLong())).thenReturn(getHop());
         HopRestController controller = new HopRestController(hopService);
 
-        assertNotNull(controller.findById("id"));
+        assertNotNull(controller.findById(1L));
         logger.info("findById_OK");
     }
 
     @Test
     public void findById_NO_RESULTS() {
 
-        when(hopService.findById(anyString())).thenReturn(null);
+        when(hopService.findById(anyLong())).thenReturn(null);
         HopRestController controller = new HopRestController(hopService);
 
-        assertNull(controller.findById("id"));
+        assertNull(controller.findById(1L));
         logger.info("findById_NO_RESULTS");
 
     }
@@ -89,8 +89,8 @@ public class HopRestControllerTest {
     public void update(){
         HopRestController controller = new HopRestController(hopService);
 
-        controller.update("id", "title", "author", "book", "nowhere");
-        verify(hopService, only()).replaceOne(anyString(), anyString(), anyString(), anyString(), anyString());
+        controller.update(1L, "title", "author", "book", "nowhere");
+        verify(hopService, only()).replaceOne(anyLong(), anyString(), anyString(), anyString(), anyString());
         logger.info("update_OK");
 
     }
@@ -99,8 +99,8 @@ public class HopRestControllerTest {
     public void delete(){
         HopRestController controller = new HopRestController(hopService);
 
-        controller.delete("id");
-        verify(hopService, only()).delete(anyString());
+        controller.delete(1L);
+        verify(hopService, only()).delete(anyLong());
         logger.info("delete_OK");
 
     }

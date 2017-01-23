@@ -24,7 +24,7 @@ class HopService {
     void setHopRepository(HopRepository hopRepository){
         this.hopRepository = hopRepository;
     }
-    Hop findById(String id) {
+    Hop findById(Long id) {
         return hopRepository.findOne(id);
 
     }
@@ -52,7 +52,7 @@ class HopService {
         hopRepository.save(hop);
     }
 
-    void replaceOne(String id, String title, String author, String type, String location) {
+    void replaceOne(Long id, String title, String author, String type, String location) {
         Hop hop = hopRepository.findOne(id);
         hop.setTitle(title);
         hop.setAuthor(author);
@@ -61,7 +61,7 @@ class HopService {
         hopRepository.save(hop);
     }
 
-    void delete(String id) {
+    void delete(Long id) {
         hopRepository.delete(id);
     }
 }//:)
